@@ -6,6 +6,8 @@ import Navbar from "scenes/navbar";
 
 import SearchIcon from '@mui/icons-material/Search';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { setSearch } from "state";
+import { useDispatch } from "react-redux";
 
 const PackagePage = () => {
     const theme = useTheme();
@@ -20,15 +22,18 @@ const PackagePage = () => {
     const [destiny, setDestiny] = useState('');
 
     async function fetchData() {
-        const response = await fetch('https://deviagem-server.onrender.com/packages', {
+        const response = await fetch('http://localhost:3001/packages', {
             method: 'GET',
         });
         const data = await response.json();
         setPackages(data.packages);
     }
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
         fetchData();
+        dispatch(setSearch({ search: null }))
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {

@@ -64,7 +64,7 @@ const ActivitesPage = () => {
 
     const [userFetch, setUserFetch] = useState();
     const fetchUser = async (cpf) => {
-        const user = await fetch(`https://deviagem-server.onrender.com/auth/getUser/${cpf}`, {
+        const user = await fetch(`https://localhost:3001/auth/getUser/${cpf}`, {
             method: 'GET'
         })
 
@@ -114,7 +114,7 @@ const ActivitesPage = () => {
     const updateUser = async (data) => {
 
         const response = await fetch(
-            'https://deviagem-server.onrender.com/auth/updateUser', {
+            'https://localhost:3001/auth/updateUser', {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
@@ -130,7 +130,7 @@ const ActivitesPage = () => {
 
     const updatePassword = async (data) => {
         const response = await fetch(
-            'https://deviagem-server.onrender.com/auth/updatePassword', {
+            'https://localhost:3001/auth/updatePassword', {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
@@ -182,7 +182,7 @@ const ActivitesPage = () => {
 
     const [userSelected, setUserSelected] = useState();
     const getUserSelected = async (cpf) => {
-        const response = await fetch(`https://deviagem-server.onrender.com/auth/getUser/${cpf}`, {
+        const response = await fetch(`https://localhost:3001/auth/getUser/${cpf}`, {
             method: 'GET'
         })
 
@@ -217,7 +217,7 @@ const ActivitesPage = () => {
             cpf: cpfSemFormatacao
         }
 
-        const response = await fetch("https://deviagem-server.onrender.com/auth/updateAcessLevel", {
+        const response = await fetch("https://localhost:3001/auth/updateAcessLevel", {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
@@ -375,7 +375,7 @@ const ActivitesPage = () => {
                                 {userFetch && userFetch.activities.map((atividade) => (
                                     <Box sx={{ width: '44vw', border: '1px solid #C4C4C4', borderRadius: '10px', display: 'flex' }}>
                                         <Box sx={{
-                                            backgroundImage: `url(https://deviagem-server.onrender.com/assets/${atividade.cartInformations.packages.imagem})`,
+                                            backgroundImage: `url(https://localhost:3001/assets/${atividade.cartInformations.packages.imagem})`,
                                             backgroundSize: 'cover',
                                             backgroundPosition: 'center',
                                             backgroundRepeat: 'no-repeat',
@@ -589,7 +589,7 @@ const ActivitesPage = () => {
                         {userFetch && userFetch.activities.map((atividade) => (
                             <Box sx={{ width: '100%', border: '1px solid grey', borderRadius: '10px', display: 'flex', flexDirection: 'column' }}>
                                 <Box sx={{
-                                    backgroundImage: `url(https://deviagem-server.onrender.com/assets/${atividade.cartInformations.packages.imagem})`,
+                                    backgroundImage: `url(https://localhost:3001/assets/${atividade.cartInformations.packages.imagem})`,
                                     backgroundSize: 'cover',
                                     backgroundPosition: 'center',
                                     backgroundRepeat: 'no-repeat',

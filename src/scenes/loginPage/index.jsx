@@ -119,7 +119,7 @@ const LoginPage = () => {
     requestBody['birthDate'] = formatarData(requestBody['birthDate']);
 
     const savedUserResponse = await fetch(
-      "https://deviagem-server.onrender.com/auth/register",
+      "http://localhost:3001/auth/register",
       {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
@@ -144,7 +144,7 @@ const LoginPage = () => {
   const login = async (values, onSubmitProps) => {
     console.log(faseFlow === 1)
     const loggedInResponse = await fetch(
-      "https://deviagem-server.onrender.com/auth/login", {
+      "http://localhost:3001/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values)

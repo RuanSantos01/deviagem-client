@@ -12,8 +12,8 @@ const ImageGalleryElastic = (props) => {
                 <Carousel style={{ height: '50vh', backgroundColor: '#E6ECF5' }}>
                     {images.map((item, index) => <div key={index}>
                         <img
-                            src={`https://deviagem-server.onrender.com/assets/${item}`}
-                            alt={`https://deviagem-server.onrender.com/assets/${item}`}
+                            src={`http://localhost:3001/assets/${item}`}
+                            alt={`http://localhost:3001/assets/${item}`}
                         />
                     </div>)}
                 </Carousel>
@@ -30,8 +30,8 @@ const ImageGalleryElastic = (props) => {
                                     width: '100%',
                                     height: '300px',
                                 }}
-                                src={`https://deviagem-server.onrender.com/assets/${item}`}
-                                alt={`https://deviagem-server.onrender.com/assets/${item}`}
+                                src={`http://localhost:3001/assets/${item}`}
+                                alt={`http://localhost:3001/assets/${item}`}
                             />
                         </div>)
                     }

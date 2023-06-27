@@ -18,7 +18,7 @@ const AccommodationCard = (props) => {
     }
 
     const backgroundAccommodation = {
-        backgroundImage: `url(https://deviagem-server.onrender.com/assets/${image})`,
+        backgroundImage: `url(http://localhost:3001/assets/${image})`,
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         width: isNonMobile ? "25%" : '100%',

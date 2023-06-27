@@ -21,7 +21,7 @@ const SearchPage = () => {
     const [destiny, setDestiny] = useState('');
 
     async function fetchData() {
-        const response = await fetch('https://deviagem-server.onrender.com/packages', {
+        const response = await fetch('http://localhost:3001/packages', {
             method: 'GET',
         });
         const data = await response.json();

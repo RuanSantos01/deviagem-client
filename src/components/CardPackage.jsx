@@ -2,7 +2,7 @@ import { Box, Button, Typography, useTheme } from '@mui/material';
 
 import BedIcon from '@mui/icons-material/Bed';
 import AirplaneTicketIcon from '@mui/icons-material/AirplaneTicket';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { setPackage } from 'state';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -11,7 +11,7 @@ const CardPackage = (props) => {
     const { imagem, valorPassagem, hospedagem, dataInicio, dataFim, cem } = props.package;
 
     const imageBanner = {
-        backgroundImage: `url(https://deviagem-server.onrender.com/assets/${imagem})`,
+        backgroundImage: `url(http://localhost:3001/assets/${imagem})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -27,10 +27,18 @@ const CardPackage = (props) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const searchOptions = useSelector((state) => state.search)
+
     const handleButton = () => {
         dispatch(
             setPackage({ package: props.package })
         )
+
+        if (searchOptions !== null) {
+            navigate('/packages/cart/filter')
+            return
+        }
+
         navigate('/packages/cart')
     }
 

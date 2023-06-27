@@ -11,7 +11,7 @@ const TravelTable = (props) => {
 
     const [travels, setTravels] = useState();
     const fetchTravels = async () => {
-        const travels = await fetch('https://deviagem-server.onrender.com/states/getTravels', {
+        const travels = await fetch('http://localhost:3001/states/getTravels', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ originLocationCode, destinationLocationCode, departureDate, returnDate, adults })

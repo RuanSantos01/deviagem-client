@@ -26,6 +26,7 @@ import WorkIcon from '@mui/icons-material/Work';
 import { useDispatch } from 'react-redux';
 import { setSearch } from 'state';
 import { useNavigate } from 'react-router-dom';
+import CarouselScripts from 'widgets/CarouselScripts';
 
 const imagemStyle = {
   backgroundImage: `url(${bannerHome2})`,
@@ -79,14 +80,10 @@ const HomePage = () => {
     borderRadius: '40px'
   };
 
-  // CALENDAR
-  const [startDate, setStartDate] = useState('')
-  const [endDate, setEndDate] = useState('')
-
   // DE PARA 
   const [states, setStates] = useState([])
   async function fetchStates() {
-    const response = await fetch('https://deviagem-server.onrender.com/states/states', {
+    const response = await fetch('http://localhost:3001/states/states', {
       method: 'GET',
     });
     const data = await response.json();
@@ -121,12 +118,10 @@ const HomePage = () => {
   });
 
   const handleStartDate = (newStartDate) => {
-    setStartDate(newStartDate)
-    formik.setFieldValue('ida', startDate)
+    formik.setFieldValue('ida', newStartDate)
   }
   const handleEndDate = (newEndDate) => {
-    setEndDate(newEndDate)
-    formik.setFieldValue('volta', endDate)
+    formik.setFieldValue('volta', newEndDate)
   }
 
   const handleSubmitClass = (values) => {
@@ -358,7 +353,7 @@ const HomePage = () => {
             <Box sx={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}>
 
               <Button onClick={() => navigate('/packages')} sx={{ '&:hover': { boxShadow: "4px 4px 2px rgba(0, 0, 0, 0.3)" } }} style={imagemPlanejamento}></Button>
-              <Button sx={{ '&:hover': { boxShadow: "4px 4px 2px rgba(0, 0, 0, 0.3)" } }} style={imagemRoteiros}></Button>
+              <Button onClick={() => navigate('/scripts')} sx={{ '&:hover': { boxShadow: "4px 4px 2px rgba(0, 0, 0, 0.3)" } }} style={imagemRoteiros}></Button>
             </Box>
 
           </Box>
@@ -378,7 +373,7 @@ const HomePage = () => {
           }}>
 
             <Button onClick={() => navigate('/packages')} sx={{ '&:hover': { boxShadow: "4px 4px 2px rgba(0, 0, 0, 0.3)" } }} style={imagemPlanejamento}></Button>
-            <Button sx={{ '&:hover': { boxShadow: "4px 4px 2px rgba(0, 0, 0, 0.3)" } }} style={imagemRoteiros}></Button>
+            <Button onClick={() => navigate('/scripts')} sx={{ '&:hover': { boxShadow: "4px 4px 2px rgba(0, 0, 0, 0.3)" } }} style={imagemRoteiros}></Button>
           </Box>
         )}
 
@@ -401,7 +396,7 @@ const HomePage = () => {
 
 
           <Box sx={{ display: 'flex', flexDirection: isNonMobile ? 'row' : 'column-reverse', justifyContent: 'space-between', width: isNonMobile ? '80rem' : '100%', color: 'white', gap: '0.5rem' }}>
-            <Carousel />
+            <CarouselScripts />
 
             {isNonMobile ? (
               <Box sx={{ width: '40%', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '1.5rem' }}>

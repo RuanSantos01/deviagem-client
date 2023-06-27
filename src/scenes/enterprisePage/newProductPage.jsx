@@ -77,7 +77,7 @@ const NewProductPage = () => {
 
     const [estados, setEstados] = useState([])
     async function fetchStates() {
-        const response = await fetch('https://deviagem-server.onrender.com/states/states', {
+        const response = await fetch('http://localhost:3001/states/states', {
             method: 'GET',
         });
         const data = await response.json();
@@ -91,7 +91,7 @@ const NewProductPage = () => {
 
     const [accommodations, setAccommodations] = useState();
     const fetchAccommodations = async (destino) => {
-        const response = await fetch('https://deviagem-server.onrender.com/accommodations/getByDestiny', {
+        const response = await fetch('http://localhost:3001/accommodations/getByDestiny', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ destiny: destino }),
@@ -167,7 +167,7 @@ const NewProductPage = () => {
             formData.append('quartos[image][]', quartosImages[i].name);
         }
 
-        const response = await fetch('https://deviagem-server.onrender.com/accommodations/register', {
+        const response = await fetch('http://localhost:3001/accommodations/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: formData,
@@ -260,7 +260,7 @@ const NewProductPage = () => {
         formData.set('imagens', arrayImagens)
         formData.append('imagensMulter', req.imagens)
 
-        const response = await fetch('https://deviagem-server.onrender.com/packages/insertPackage', {
+        const response = await fetch('http://localhost:3001/packages/insertPackage', {
             method: 'POST',
             body: formData,
         })
@@ -279,7 +279,7 @@ const NewProductPage = () => {
             pack: pack
         }
 
-        const response = await fetch('https://deviagem-server.onrender.com/packages/insertPackagesToAccount', {
+        const response = await fetch('http://localhost:3001/packages/insertPackagesToAccount', {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
@@ -498,7 +498,7 @@ const NewProductPage = () => {
                                 <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                     <Box sx={{ border: '1px solid #C4C4C4', width: '100%', borderRadius: '10px', height: '250px', display: 'flex' }}>
                                         <Box sx={{
-                                            backgroundImage: `url(https://deviagem-server.onrender.com/assets/${acc.image})`,
+                                            backgroundImage: `url(http://localhost:3001/assets/${acc.image})`,
                                             backgroundSize: 'cover',
                                             backgroundPosition: 'center',
                                             backgroundRepeat: 'no-repeat',

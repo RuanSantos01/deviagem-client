@@ -47,7 +47,7 @@ const CompletePaymentPage = () => {
         }
 
         const response = await fetch(
-            'https://deviagem-server.onrender.com/packages/updatePaidPackage', {
+            'http://localhost:3001/packages/updatePaidPackage', {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(objFinalUpdate)
@@ -213,7 +213,7 @@ const CompletePaymentPage = () => {
     const cpfMask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/];
 
     const imagemStyle = {
-        backgroundImage: `url(https://deviagem-server.onrender.com/assets/${cartInformations.selectedCard.cards.imageQuarto})`,
+        backgroundImage: `url(http://localhost:3001/assets/${cartInformations.selectedCard.cards.imageQuarto})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',

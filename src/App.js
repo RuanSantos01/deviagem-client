@@ -23,6 +23,9 @@ import { useSelector } from "react-redux";
 import ProductsPage from "scenes/enterprisePage/ProductsPage";
 import NewProductPage from "scenes/enterprisePage/newProductPage";
 import SearchPage from "scenes/searchPage";
+import PackageCartFilterPage from "scenes/cartPage/packageCartFilterPage";
+import ScriptsPage from "scenes/scriptsPage";
+import ScriptsSecondPage from "scenes/scriptsPage/scriptsSecondPage";
 
 function App() {
 
@@ -41,7 +44,11 @@ function App() {
 
             <Route path="/resultfilter" element={<SearchPage />} />
 
+            <Route path="/scripts" element={<ScriptsPage />} />
+            <Route path="/roteiro" element={<ScriptsSecondPage />} />
+
             <Route path="/packages/cart" element={<PackageCartPage />} />
+            <Route path="/packages/cart/filter" element={<PackageCartFilterPage />} />
             <Route path="/packages/cart/checkout" element={<PaymentPage />} />
             <Route path="/packages/cart/checkout/success" element={<FinalPage />} />
             <Route path="/packages/cart/checkout/completePayment" element={<CompletePaymentPage />} />

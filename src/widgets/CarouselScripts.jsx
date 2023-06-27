@@ -1,8 +1,8 @@
 import { Box, Button, useMediaQuery } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import Card from './Card';
+import SecondCardScript from 'components/SecondCardScript';
 
-export default function Carousel() {
+export default function CarouselScripts() {
     const isNonMobile = useMediaQuery("(min-width:650px)");
     const [currentIndex, setCurrentIndex] = useState(0);
     const [packages, setPackages] = useState([]);
@@ -15,15 +15,15 @@ export default function Carousel() {
         setCurrentIndex(currentIndex === 0 ? packages.length - 1 : currentIndex - 1);
     };
 
+    async function fetchData() {
+        const response = await fetch('http://localhost:3001/scripts/getAll', {
+            method: 'GET',
+        });
+        const data = await response.json();
+        setPackages(data);
+    }
 
     useEffect(() => {
-        async function fetchData() {
-            const response = await fetch('http://localhost:3001/packages', {
-                method: 'GET',
-            });
-            const data = await response.json();
-            setPackages(data.packages);
-        }
         fetchData();
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -41,14 +41,14 @@ export default function Carousel() {
             {isNonMobile ? (
                 <>
                     {packages.slice(currentIndex, currentIndex + 3).map((item, index) => (
-                        <Card key={index} destino={item.destino} item={item} imagem={item.imagem} cem={item.cem} valor={item.valorPassagem}></Card>
+                        <SecondCardScript key={index} package={item} ></SecondCardScript>
                     ))}
                 </>
 
             ) : (
                 <>
                     {packages.slice(currentIndex, currentIndex + 1).map((item, index) => (
-                        <Card key={index} destino={item.destino} item={item} imagem={item.imagem} cem={item.cem} valor={item.valorPassagem}></Card>
+                        <SecondCardScript key={index} package={item}></SecondCardScript>
                     ))}
                 </>
             )}

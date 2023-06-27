@@ -17,6 +17,7 @@ import TravelTable from 'components/TravelTable';
 
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import dayjs from 'dayjs';
 
 function srcset(image, size, rows = 1, cols = 1) {
     return {
@@ -26,10 +27,11 @@ function srcset(image, size, rows = 1, cols = 1) {
     };
 }
 
-const PackageCartPage = () => {
+const PackageCartFilterPage = () => {
     const isNonMobile = useMediaQuery("(min-width:650px)");
     const packages = useSelector((state) => state.package);
 
+    const searchOptions = useSelector((state) => state.search);
 
     const theme = useTheme();
     const blueColor = theme.palette.background.blue;
@@ -44,20 +46,6 @@ const PackageCartPage = () => {
         })
     }
 
-    const [distancia, setDistancia] = useState([]);
-    async function fetchDistancias() {
-        const response = await fetch(`http://localhost:3001/states/l/${packages.destino}`, {
-            method: 'GET'
-        });
-        const data = await response.json();
-        if (!data) {
-            return;
-        }
-
-        const listaA = data.filter(estado => estado.nome.toLowerCase() !== packages.destino.toLowerCase())
-
-        setDistancia(listaA);
-    }
 
     const [estados, setEstados] = useState([])
     async function fetchStates() {
@@ -69,28 +57,18 @@ const PackageCartPage = () => {
         setEstados(listaA);
     }
 
-    const [estado, setEstado] = useState();
 
     useEffect(() => {
-        fetchDistancias();
         fetchStates();
         mapingPackageImages();
+        fetchIataCodes(searchOptions.de)
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
-        if (estado) {
+        if (searchOptions.de) {
             setSelectedCart()
         }
-    }, [estado]) // eslint-disable-line react-hooks/exhaustive-deps
-
-    const handleChangeState = (e) => {
-        const estadoSelecionado = distancia.find(es => es.nome === e.target.value);
-        if (estadoSelecionado) {
-            setEstado(estadoSelecionado);
-            fetchIataCodes(estadoSelecionado.nome);
-        }
-    }
-
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -147,34 +125,26 @@ const PackageCartPage = () => {
         }
     }
 
-    const [dataIncio, setDataInicio] = useState();
-    const handleDataInicio = (dateCru) => {
-        const date = new Date(dateCru);
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        setDataInicio(`${year}-${month}-${day}`);
-    }
+    const date = new Date(searchOptions.ida);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const [dataInicio] = useState(dayjs(`${year}-${month}-${day}`));
+    const [dataInicioi] = useState(`${year}-${month}-${day}`);
 
-    const [dataFim, setDataFim] = useState();
-    const handleDataFim = (dateCru) => {
-        const date = new Date(dateCru);
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        setDataFim(`${year}-${month}-${day}`);
-    }
+
+    const dateFim = new Date(searchOptions.volta);
+    const yearFim = dateFim.getFullYear();
+    const monthFim = String(dateFim.getMonth() + 1).padStart(2, '0');
+    const dayFim = String(dateFim.getDate()).padStart(2, '0');
+    const [dataFim] = useState(dayjs(`${yearFim}-${monthFim}-${dayFim}`));
+    const [dataFimf] = useState(`${yearFim}-${monthFim}-${dayFim}`);
+
 
     const [render, setRender] = useState(false);
     const handleSearchTrip = () => {
         setRender(true);
     }
-
-    useEffect(() => {
-        if (render) {
-            return
-        }
-    }, [render])
 
     const [trip, setTrip] = useState();
     const handleSelectTrip = (trip) => {
@@ -199,7 +169,7 @@ const PackageCartPage = () => {
         dispatch(setCart({
             cart: {
                 packages,
-                estado,
+                estado: searchOptions.de,
                 selectedDate: { dataIda: trip.dataIdaCompleta, dataVolta: trip.dataVoltaCompleta, diffDays: trip.diffDays },
                 selectedCard,
                 valorPassagem: parseFloat(trip.valor),
@@ -247,8 +217,8 @@ const PackageCartPage = () => {
                                     sx={{ color: blueColor, fontWeight: 'bold' }}
                                 >Origem</InputLabel>
                                 <Select
-                                    value={estado}
-                                    onChange={(e) => handleChangeState(e)}
+                                    value={searchOptions.de}
+                                    disabled
                                     sx={{ backgroundColor: 'white' }}
                                 >
                                     {estados.map((estado, i) => (
@@ -263,8 +233,8 @@ const PackageCartPage = () => {
                             <Box sx={{ width: '100%', display: 'flex', flexDirection: 'row', gap: '1rem', justifyContent: 'space-between' }}>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DatePicker
-                                        disabled={render}
-                                        onChange={handleDataInicio}
+                                        disabled
+                                        value={dataInicio}
                                         label={<span style={{ color: blueColor, fontWeight: "bold", fontSize: "1rem" }}>Data de Ida</span>}
                                         format="DD/MM/YYYY"
                                         sx={{ width: isNonMobile ? '48%' : '100%' }}
@@ -273,8 +243,8 @@ const PackageCartPage = () => {
 
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DatePicker
-                                        disabled={render}
-                                        onChange={handleDataFim}
+                                        disabled
+                                        value={dataFim}
                                         label={<span style={{ color: blueColor, fontWeight: "bold", fontSize: "1rem" }}>Data de Volta</span>}
                                         format="DD/MM/YYYY"
                                         sx={{ width: isNonMobile ? '48%' : '100%' }}
@@ -286,7 +256,7 @@ const PackageCartPage = () => {
                         {render ? (
                             <Box sx={{ width: '100%' }}>
                                 <Typography>Selecione sua passagem para continuar</Typography>
-                                <TravelTable originLocationCode={iataCodeOrigem} destinationLocationCode={iataCodeDestino} departureDate={dataIncio} returnDate={dataFim} adults={packages.pessoas} render={render} handleSelectTrip={handleSelectTrip} />
+                                <TravelTable originLocationCode={iataCodeOrigem} destinationLocationCode={iataCodeDestino} departureDate={dataInicioi} returnDate={dataFimf} adults={packages.pessoas} render={render} handleSelectTrip={handleSelectTrip} />
                             </Box>
                         ) : (
                             <Button onClick={handleSearchTrip} sx={{ fontWeight: 'bold', width: '100%', backgroundColor: blueColor, border: `1px solid ${blueColor}`, height: '50px', color: 'white', '&:hover': { color: blueColor } }}>Buscar viagens</Button>
@@ -368,7 +338,7 @@ const PackageCartPage = () => {
                                 </Box>
                             )}
 
-                            {estado && selectedCard && (
+                            {searchOptions.de && selectedCard && (
                                 <Button onClick={() => handleButtonClick()} sx={{ border: `1px solid ${blueColor}`, backgroundColor: blueColor, color: 'white', height: '50px', '&:hover': { color: blueColor } }}>Prosseguir com a compra</Button>
                             )}
 
@@ -385,4 +355,4 @@ const PackageCartPage = () => {
     )
 }
 
-export default PackageCartPage;
+export default PackageCartFilterPage;
