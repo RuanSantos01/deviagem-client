@@ -11,7 +11,7 @@ const CardCart = (props) => {
     const { quarto } = useSelector((state) => state.cart)
 
     const backgroundAccommodation = {
-        backgroundImage: `url(http://localhost:3001/assets/${quarto.image})`,
+        backgroundImage: `url(https://deviagem-server.onrender.com/assets/${quarto.image})`,
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         width: "20%",

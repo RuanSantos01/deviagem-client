@@ -42,7 +42,7 @@ const Navbar = () => {
   const [codigo, setCode] = useState('');
   const handleSearchCode = async () => {
     const response = await fetch(
-      'http://localhost:3001/packages/paidPackages',
+      'https://deviagem-server.onrender.com/packages/paidPackages',
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

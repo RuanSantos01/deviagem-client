@@ -20,8 +20,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 function srcset(image, size, rows = 1, cols = 1) {
     return {
-        src: `http://localhost:3001/assets/${image.img}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
-        srcSet: `http://localhost:3001/assets/${image.img}?w=${size * cols}&h=${size * rows
+        src: `https://deviagem-server.onrender.com/assets/${image.img}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
+        srcSet: `https://deviagem-server.onrender.com/assets/${image.img}?w=${size * cols}&h=${size * rows
             }&fit=crop&auto=format&dpr=2 2x`,
     };
 }
@@ -45,7 +45,7 @@ const PackageCartPage = () => {
 
     const [distancia, setDistancia] = useState([]);
     async function fetchDistancias() {
-        const response = await fetch(`http://localhost:3001/states/l/${packages.destino}`, {
+        const response = await fetch(`https://deviagem-server.onrender.com/states/l/${packages.destino}`, {
             method: 'GET'
         });
         const data = await response.json();
@@ -60,7 +60,7 @@ const PackageCartPage = () => {
 
     const [estados, setEstados] = useState([])
     async function fetchStates() {
-        const response = await fetch('http://localhost:3001/states/states', {
+        const response = await fetch('https://deviagem-server.onrender.com/states/states', {
             method: 'GET',
         });
         const data = await response.json();
@@ -132,7 +132,7 @@ const PackageCartPage = () => {
             destino: packages.destino
         }
 
-        const response = await fetch('http://localhost:3001/states/getIATAcodes', {
+        const response = await fetch('https://deviagem-server.onrender.com/states/getIATAcodes', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(reqBody)

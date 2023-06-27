@@ -72,7 +72,7 @@ const AccommodationPage = () => {
 
     useEffect(() => {
         async function fetchData() {
-            const response = await fetch('http://localhost:3001/accommodations', {
+            const response = await fetch('https://deviagem-server.onrender.com/accommodations', {
                 method: 'GET',
             });
             const data = await response.json();

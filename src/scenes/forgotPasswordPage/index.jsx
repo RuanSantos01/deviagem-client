@@ -70,7 +70,7 @@ const ForgotPasswordPage = () => {
 
   const fetchForgotPassword = async (email) => {
 
-    const response = await fetch('http://localhost:3001/auth/forgotPassword', {
+    const response = await fetch('https://deviagem-server.onrender.com/auth/forgotPassword', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email })
@@ -87,7 +87,7 @@ const ForgotPasswordPage = () => {
   }
 
   const fetchConfirmEmail = async (code) => {
-    const response = await fetch('http://localhost:3001/auth/confirmAccount', {
+    const response = await fetch('https://deviagem-server.onrender.com/auth/confirmAccount', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -106,7 +106,7 @@ const ForgotPasswordPage = () => {
   }
 
   const fetchUpdatePassword = async (password) => {
-    const response = await fetch('http://localhost:3001/auth/recoverPassword', {
+    const response = await fetch('https://deviagem-server.onrender.com/auth/recoverPassword', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ password, email })

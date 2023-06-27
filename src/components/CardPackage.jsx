@@ -11,7 +11,7 @@ const CardPackage = (props) => {
     const { imagem, valorPassagem, hospedagem, dataInicio, dataFim, cem } = props.package;
 
     const imageBanner = {
-        backgroundImage: `url(http://localhost:3001/assets/${imagem})`,
+        backgroundImage: `url(https://deviagem-server.onrender.com/assets/${imagem})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',

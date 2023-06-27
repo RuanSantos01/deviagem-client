@@ -33,12 +33,12 @@ const ProductsPage = () => {
     });
     const [packages, setPackages] = useState();
     const fetchUserPackages = async () => {
-        const response = await fetch(`http://localhost:3001/packages/getUserPackages/${user.cpf}`, {
+        const response = await fetch(`https://deviagem-server.onrender.com/packages/getUserPackages/${user.cpf}`, {
             method: 'GET',
         })
 
         const packages = await response.json();
-        console.log(`url(http://localhost:3001/assets${packages[0].imagem})`)
+        console.log(`url(https://deviagem-server.onrender.com/assets${packages[0].imagem})`)
 
         if (response.ok && packages) {
             console.log(packages)
@@ -153,7 +153,7 @@ const ProductsPage = () => {
                             {packages && packages.map((p) => (
                                 <Box sx={{ width: isNonMobile ? '100%' : '96%', border: '1px solid #DCE0E6', borderRadius: '10px', display: 'flex', flexDirection: isNonMobile ? 'row' : 'column' }}>
                                     <Box sx={{
-                                        backgroundImage: `url(http://localhost:3001/assets/${p.imagem})`,
+                                        backgroundImage: `url(https://deviagem-server.onrender.com/assets/${p.imagem})`,
                                         backgroundSize: 'cover',
                                         backgroundPosition: 'center',
                                         backgroundRepeat: 'no-repeat',

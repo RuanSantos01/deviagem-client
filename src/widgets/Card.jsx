@@ -14,7 +14,7 @@ const Card = (props) => {
     const dispatch = useDispatch();
 
     const imagemStyle = {
-        backgroundImage: `url(http://localhost:3001/assets/${imagem})`,
+        backgroundImage: `url(https://deviagem-server.onrender.com/assets/${imagem})`,
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         width: "200px",

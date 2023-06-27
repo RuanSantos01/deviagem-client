@@ -19,7 +19,7 @@ const ImageGallery = (props) => {
             showNav={true}
             renderItem={(item) => (
                 <div>
-                    <img src={`http://localhost:3001/assets/${item}`} alt={`http://localhost:3001/assets/${item}`} />
+                    <img src={`https://deviagem-server.onrender.com/assets/${item}`} alt={`https://deviagem-server.onrender.com/assets/${item}`} />
                 </div>
             )}
         />

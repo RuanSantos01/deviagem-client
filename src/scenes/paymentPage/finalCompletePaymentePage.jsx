@@ -20,7 +20,7 @@ const FinalCompletePaymentePage = () => {
     const { cartInformations } = paymentInformations;
 
     const imagemHospedagemStyle = {
-        backgroundImage: `url(http://localhost:3001/assets/${cartInformations.selectedCard.cards.imageQuarto})`,
+        backgroundImage: `url(https://deviagem-server.onrender.com/assets/${cartInformations.selectedCard.cards.imageQuarto})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
@@ -30,7 +30,7 @@ const FinalCompletePaymentePage = () => {
     };
 
     const imagemVooStyle = {
-        backgroundImage: `url(http://localhost:3001/assets/${cartInformations.packages.imagem})`,
+        backgroundImage: `url(https://deviagem-server.onrender.com/assets/${cartInformations.packages.imagem})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',

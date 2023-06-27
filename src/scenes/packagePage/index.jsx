@@ -20,7 +20,7 @@ const PackagePage = () => {
     const [destiny, setDestiny] = useState('');
 
     async function fetchData() {
-        const response = await fetch('http://localhost:3001/packages', {
+        const response = await fetch('https://deviagem-server.onrender.com/packages', {
             method: 'GET',
         });
         const data = await response.json();

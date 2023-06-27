@@ -41,7 +41,7 @@ const ConfirmEmailPage = () => {
 
   const login = async () => {
     const loggedInResponse = await fetch(
-      "http://localhost:3001/auth/login", {
+      "https://deviagem-server.onrender.com/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user)
@@ -72,7 +72,7 @@ const ConfirmEmailPage = () => {
     }
 
     const codeSent = await fetch(
-      "http://localhost:3001/auth/confirmAccount", {
+      "https://deviagem-server.onrender.com/auth/confirmAccount", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body)

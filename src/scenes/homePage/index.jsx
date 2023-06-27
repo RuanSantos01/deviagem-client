@@ -86,7 +86,7 @@ const HomePage = () => {
   // DE PARA 
   const [states, setStates] = useState([])
   async function fetchStates() {
-    const response = await fetch('http://localhost:3001/states/states', {
+    const response = await fetch('https://deviagem-server.onrender.com/states/states', {
       method: 'GET',
     });
     const data = await response.json();
